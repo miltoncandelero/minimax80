@@ -1,31 +1,15 @@
 
-/// <reference path="Sprite.ts" />
+/// <reference path="connect4/Game.ts" />
 
-let t: number = 0;
-const ticFace = new Sprite(1, 50, 50, 14, 3, 0, 0, 2, 2)
+const game = new Game();
 
 /**
  * TIC is the 'main' function and must be present in every program. It takes no parameters and is called sixty times per second (60fps). 
  */
 function TIC(): void {
-  if (btn(0)) {
-    ticFace.y--;
-  }
-  if (btn(1)) {
-    ticFace.y++;
-  }
-  if (btn(2)) {
-    ticFace.x--;
-  }
-  if (btn(3)) {
-    ticFace.x++;
-  }
-
   cls(13);
-  ticFace.id = 1 + Math.floor((t % 60) / 30) * 2
-  ticFace.draw();
-  print("HELLO WORLD!", 84, 84);
-  t++;
+  game.draw();
+  print(game.board.getScore().toString(), 84, 84);
 }
 
 /**
