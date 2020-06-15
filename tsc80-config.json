@@ -1,0 +1,20 @@
+{
+  "game": {
+    "author": "Elemental Code",
+    "title": "minimax80",
+    "desc": "An implementation of minimax with alpha beta pruning in tic80",
+    "cart": "minimax80.tic",
+    "input": "gamepad",
+    "backup": true
+  },
+  "tic": {
+    "ticExecutable": "C:/Users/pc/AppData/Roaming/com.nesbox.tic/TIC-80/.local/tic80.exe",
+    "cartsDirectory": "C:/Users/pc/AppData/Roaming/com.nesbox.tic/TIC-80"
+  },
+  "compression": {
+    "compressedFile": "build/compressed.js",
+    "indentLevel": 1,
+    "compress": true,
+    "mangle": true
+  }
+}
