@@ -20,7 +20,7 @@ class Game {
 		while (!this.isGameOver()) {
 			//const { x, y } = moves[Math.floor(Math.random() * moves.length)]
 			//this.board.putToken(x, y, (flip++ % 2) ? -1 : 1);
-			this.AI((flip++ % 2) ? -1 : 1, 4);
+			this.AI((flip++ % 2) ? -1 : 1, 1);
 			//moves = this.board.getAvailableMoves();
 		}
 		trace("exited")
@@ -61,18 +61,13 @@ class Game {
 	public AI(player: -1 | 1, level: number) {
 		const moves = this.board.getAvailableMoves();
 		let options: { x: number, y: number, score: number }[] = [];
-		for (let l = 0; l < level+1; l++) {
-			options = [];
-			for (const move of moves) {
-				this.board.putToken(move.x, move.y, player);
-				//analyze it
-				options.push({ x: move.x, y: move.y, score: minimax(this.board, player == 1 ? -1 : 1, l) });
-				//undo it
-				this.board.removeToken(move.x, move.y);
-			}
-			if (options.some(v => v.score != 0)){
-				break;
-			}
+		options = [];
+		for (const move of moves) {
+			this.board.putToken(move.x, move.y, player);
+			//analyze it
+			options.push({ x: move.x, y: move.y, score: minimax(this.board, player == 1 ? -1 : 1, 1, level) });
+			//undo it
+			this.board.removeToken(move.x, move.y);
 		}
 		if (options.length == 0) {
 			throw ("ERROR! game should be over!");
@@ -84,7 +79,7 @@ class Game {
 		options = options.sort((a, b) => (a.score - b.score) * -player);
 
 		this.board.putToken(options[0].x, options[0].y, player);
-		trace("player " + player + " chose score " + "{"+options[0].x+","+options[0].y+","+options[0].score+"}"+ " from " + options.map(v => "{"+v.x+","+v.y+","+v.score+"}"));
+		trace("player " + player + " chose score " + "{" + options[0].x + "," + options[0].y + "," + options[0].score + "}" + " from " + options.map(v => "{" + v.x + "," + v.y + "," + v.score + "}"));
 	}
 
 	public isGameOver(): boolean {
